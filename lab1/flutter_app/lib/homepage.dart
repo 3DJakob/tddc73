@@ -14,13 +14,17 @@ class MyHomePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              'Test',
-              style: Theme.of(context).textTheme.headline4,
-            ),
+            const Image(
+                image: AssetImage('images/sample.png'), width: 80, height: 80),
+            TextButton(
+              style: ButtonStyle(
+                foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
+              ),
+              onPressed: () {
+                print('You clicked the button!');
+              },
+              child: Text('TextButton'),
+            )
           ],
         ),
       ),
