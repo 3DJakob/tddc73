@@ -15,6 +15,7 @@ const CardBody = styled.View`
   shadow-opacity: 0.3;
   shadow-radius: 40px;
   elevation: 1;
+  z-index: 200;
 `
 
 const Column = styled.View`
@@ -101,11 +102,12 @@ export interface Card {
 export interface CardProps {
   card: Card
   focusedField: 'number' | 'name' | 'expiry' | 'cvc'
+  onTop: boolean
 }
 
-const Front: React.FC<CardProps> = ({ card, focusedField }) => {
+const Front: React.FC<CardProps> = ({ card, focusedField, onTop }) => {
   return (
-    <CardBody>
+    <CardBody style={{ zIndex: onTop ? 200 : 0 }}>
       <Background source={bgImage}>
         <Column>
           <Row style={{ justifyContent: 'space-between', alignItems: 'flex-start' }}>

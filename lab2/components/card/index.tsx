@@ -1,6 +1,8 @@
 import { animated, useSpring } from '@react-spring/native'
 import { View } from 'react-native'
+import { useState } from 'react'
 import Front from './Front'
+import Back from './Back'
 
 const AnimatedView = animated(View)
 
@@ -19,10 +21,20 @@ export interface CardProps {
 }
 
 const CardComponent: React.FC<CardProps> = ({ card, focusedField, showBack = false }) => {
+  const [flipped, setFlipped] = useState(false)
+
   const props = useSpring({
     opacity: showBack ? 1 : 0,
     rot: showBack ? 180 : 0,
-    config: { mass: 4, tension: 700, friction: 60 }
+    config: { mass: 4, tension: 700, friction: 60 },
+    onChange (result) {
+      const rot = result.value.rot
+      if (rot > 90 && !flipped) {
+        setFlipped(true)
+      } else if (rot < 90 && flipped) {
+        setFlipped(false)
+      }
+    }
   })
 
   return (
@@ -32,7 +44,8 @@ const CardComponent: React.FC<CardProps> = ({ card, focusedField, showBack = fal
       ]
     }}
     >
-      <Front card={card} focusedField={focusedField} />
+      <Front card={card} focusedField={focusedField} onTop={!flipped} />
+      <Back card={card} focusedField={focusedField} onTop={flipped} />
     </AnimatedView>
   )
 }
