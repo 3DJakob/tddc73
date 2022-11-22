@@ -69,6 +69,7 @@ const HolderContainer = styled.View`
   border-width: 2px;
   border-color: ${(props: { focused: boolean }) => props.focused ? '#fff' : 'transparent'};
   border-radius: 8px;
+  padding: 10px;
 `
 
 const ExpireContainer = styled.View`
@@ -76,6 +77,8 @@ const ExpireContainer = styled.View`
   border-width: 2px;
   border-color: ${(props: { focused: boolean }) => props.focused ? '#fff' : 'transparent'};
   border-radius: 8px;
+  padding: 10px;
+  margin-left: 10px;
 `
 
 const Subtitle = styled.Text`
