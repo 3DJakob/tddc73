@@ -5,6 +5,7 @@ import bgImage from '../../assets/cards/2.jpeg'
 import chipImage from '../../assets/cards/chip.png'
 // @ts-expect-error
 import amexImage from '../../assets/cards/amex.png'
+import { FocusedField } from '.'
 
 const CardBody = styled.View`
   width: 100%;
@@ -104,11 +105,13 @@ export interface Card {
 
 export interface CardProps {
   card: Card
-  focusedField: 'number' | 'name' | 'expiry' | 'cvc'
+  focusedField: FocusedField
   onTop: boolean
 }
 
 const Front: React.FC<CardProps> = ({ card, focusedField, onTop }) => {
+  const cardNumber = (card.number + '################').slice(0, 16)
+
   return (
     <CardBody style={{ zIndex: onTop ? 200 : 0 }}>
       <Background source={bgImage}>
@@ -121,16 +124,16 @@ const Front: React.FC<CardProps> = ({ card, focusedField, onTop }) => {
           <Row style={{ justifyContent: 'center' }}>
             <CardNumber focused={focusedField === 'number'}>
               <DigitGroup>
-                {card.number.slice(0, 4)}
+                {cardNumber.slice(0, 4)}
               </DigitGroup>
               <DigitGroup>
-                {card.number.slice(4, 8)}
+                {cardNumber.slice(4, 8)}
               </DigitGroup>
               <DigitGroup>
-                {card.number.slice(8, 12)}
+                {cardNumber.slice(8, 12)}
               </DigitGroup>
               <DigitGroup>
-                {card.number.slice(12, 16)}
+                {cardNumber.slice(12, 16)}
               </DigitGroup>
             </CardNumber>
           </Row>

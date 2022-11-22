@@ -1,4 +1,5 @@
 import styled from 'styled-components/native'
+import { FocusedField } from '.'
 // @ts-expect-error
 import bgImage from '../../assets/cards/2.jpeg'
 // @ts-expect-error
@@ -91,7 +92,7 @@ export interface Card {
 
 export interface CardProps {
   card: Card
-  focusedField: 'number' | 'name' | 'expiry' | 'cvc'
+  focusedField: FocusedField
   onTop: boolean
 }
 

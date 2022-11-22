@@ -1,5 +1,5 @@
 import { animated, useSpring } from '@react-spring/native'
-import { View } from 'react-native'
+import { StyleProp, View, ViewStyle } from 'react-native'
 import { useState } from 'react'
 import Front from './Front'
 import Back from './Back'
@@ -14,13 +14,16 @@ export interface Card {
   cvc: string
 }
 
+export type FocusedField = 'number' | 'name' | 'expiry' | 'cvc' | 'none'
+
 export interface CardProps {
   card: Card
-  focusedField: 'number' | 'name' | 'expiry' | 'cvc'
+  focusedField: FocusedField
   showBack?: boolean
+  style?: StyleProp<ViewStyle>
 }
 
-const CardComponent: React.FC<CardProps> = ({ card, focusedField, showBack = false }) => {
+const CardComponent: React.FC<CardProps> = ({ card, focusedField, showBack = false, style }) => {
   const [flipped, setFlipped] = useState(false)
 
   const props = useSpring({
@@ -38,12 +41,14 @@ const CardComponent: React.FC<CardProps> = ({ card, focusedField, showBack = fal
   })
 
   return (
-    <AnimatedView style={{
-      transform: [
-        { rotateY: props.rot.to((rot) => `${rot}deg`) }
-      ]
-    }}
+    <AnimatedView style={[
+      {
+        transform: [
+          { rotateY: props.rot.to((rot) => `${rot}deg`) }
+        ]
+      }, style]}
     >
+
       <Front card={card} focusedField={focusedField} onTop={!flipped} />
       <Back card={card} focusedField={focusedField} onTop={flipped} />
     </AnimatedView>
