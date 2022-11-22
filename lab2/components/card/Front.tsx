@@ -1,10 +1,10 @@
 import styled from 'styled-components/native'
 // @ts-expect-error
-import bgImage from '../assets/cards/2.jpeg'
+import bgImage from '../../assets/cards/2.jpeg'
 // @ts-expect-error
-import chipImage from '../assets/cards/chip.png'
+import chipImage from '../../assets/cards/chip.png'
 // @ts-expect-error
-import amexImage from '../assets/cards/amex.png'
+import amexImage from '../../assets/cards/amex.png'
 
 const CardBody = styled.View`
   width: 100%;
