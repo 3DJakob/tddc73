@@ -1,6 +1,7 @@
 import CardComponent, { Card } from './components/Card'
 import styled from 'styled-components/native'
 import { useState } from 'react'
+import { Button } from 'react-native'
 
 const Container = styled.View`
   flex: 1;
@@ -16,6 +17,7 @@ const Limiter = styled.View`
 `
 
 const App: React.FC = () => {
+  const [showBack, setShowBack] = useState(false)
   const [card, setCard] = useState<Card>({
     number: '4242424242424242',
     name: 'John Doe',
@@ -27,7 +29,9 @@ const App: React.FC = () => {
   return (
     <Container>
       <Limiter>
-        <CardComponent card={card} />
+        <CardComponent card={card} focusedField="name" showBack={showBack} />
+        <Button title={'Toggle side ' + showBack} onPress={() => setShowBack(!showBack)}></Button>
+        
       </Limiter>
     </Container>
   )
