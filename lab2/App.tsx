@@ -1,4 +1,4 @@
-import CardComponent, { Card } from './components/Card'
+import CardComponent, { Card } from './components/card'
 import styled from 'styled-components/native'
 import { useState } from 'react'
 import { Button } from 'react-native'
@@ -29,9 +29,9 @@ const App: React.FC = () => {
   return (
     <Container>
       <Limiter>
-        <CardComponent card={card} focusedField="name" showBack={showBack} />
-        <Button title={'Toggle side ' + showBack} onPress={() => setShowBack(!showBack)}></Button>
-        
+        <CardComponent card={card} focusedField='name' showBack={showBack} />
+        <Button title={'Toggle side ' + showBack} onPress={() => setShowBack(!showBack)} />
+
       </Limiter>
     </Container>
   )
