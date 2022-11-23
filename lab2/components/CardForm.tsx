@@ -22,17 +22,23 @@ const CardForm: React.FC<CardFormProps> = ({ card, onCard, onFocus, onBlur }) =>
     }
   }
 
+  const appendSpaces = (number: string): string => {
+    const spaced = number.replace(/ /g, '')
+    const spacedWithSpaces = spaced.replace(/(.{4})/g, '$1 ')
+    return spacedWithSpaces.trim()
+  }
+
   return (
     <>
       <Input
         title='Card number'
-        value={card.number}
+        value={appendSpaces(card.number)}
         onChangeText={(number) => onCard({ number })}
-        placeholder='4242424242424242'
+        placeholder='4242 4242 4242 4242'
         keyboardType='numeric'
         onFocus={() => onFocus('number')}
         onBlur={onBlur}
-        maxLength={16}
+        maxLength={19}
       />
 
       <Input
