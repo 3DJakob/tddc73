@@ -3,9 +3,7 @@ import styled from 'styled-components/native'
 import bgImage from '../../assets/cards/2.jpeg'
 // @ts-expect-error
 import chipImage from '../../assets/cards/chip.png'
-// @ts-expect-error
-import amexImage from '../../assets/cards/amex.png'
-import { FocusedField } from '.'
+import { FocusedField, getVendorImage } from '.'
 
 const CardBody = styled.View`
   width: 100%;
@@ -118,7 +116,7 @@ const Front: React.FC<CardProps> = ({ card, focusedField, onTop }) => {
         <Column>
           <Row style={{ justifyContent: 'space-between', alignItems: 'flex-start' }}>
             <Chip source={chipImage} />
-            <Vendor source={amexImage} />
+            <Vendor source={getVendorImage(card.number)} />
           </Row>
 
           <Row style={{ justifyContent: 'center' }}>

@@ -1,10 +1,24 @@
 import { animated, useSpring } from '@react-spring/native'
-import { StyleProp, View, ViewStyle } from 'react-native'
+import { ImageSourcePropType, StyleProp, View, ViewStyle } from 'react-native'
 import { useState } from 'react'
 import Front from './Front'
 import Back from './Back'
 
 const AnimatedView = animated(View)
+
+export const getVendorImage = (cardNumber: string): ImageSourcePropType => {
+  if (cardNumber.startsWith('4')) {
+    return require('../../assets/cards/visa.png')
+  } else if (cardNumber.startsWith('5')) {
+    return require('../../assets/cards/mastercard.png')
+  } else if (cardNumber.startsWith('3') && (cardNumber[1] === '4' || cardNumber[1] === '7')) {
+    return require('../../assets/cards/amex.png')
+  } else if (cardNumber.startsWith('6') && (cardNumber[1] === '0' && cardNumber[2] === '1' && cardNumber[3] === '1')) {
+    return require('../../assets/cards/discover.png')
+  } else {
+    return require('../../assets/cards/amex.png')
+  }
+}
 
 export interface Card {
   number: string
