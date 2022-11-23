@@ -48,6 +48,7 @@ const CardForm: React.FC<CardFormProps> = ({ card, onCard, onFocus, onBlur }) =>
         placeholder='John Doe'
         onFocus={() => onFocus('name')}
         onBlur={onBlur}
+        maxLength={50}
       />
 
       <Row>
