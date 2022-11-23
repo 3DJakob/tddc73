@@ -75,19 +75,18 @@ const CardForm: React.FC<CardFormProps> = ({ card, onCard, onFocus, onBlur }) =>
           style={{ marginLeft: 10, flex: 1 }}
           maxLength={4}
         />
-
+        <Input
+          title='CVC'
+          value={card.cvc}
+          onChangeText={(cvc) => onCard({ cvc })}
+          placeholder='123'
+          keyboardType='numeric'
+          onFocus={() => onFocus('cvc')}
+          onBlur={onBlur}
+          maxLength={3}
+          style={{ marginLeft: 30, minWidth: 100 }}
+        />
       </Row>
-
-      <Input
-        title='CVC'
-        value={card.cvc}
-        onChangeText={(cvc) => onCard({ cvc })}
-        placeholder='123'
-        keyboardType='numeric'
-        onFocus={() => onFocus('cvc')}
-        onBlur={onBlur}
-        maxLength={3}
-      />
     </>
   )
 }
