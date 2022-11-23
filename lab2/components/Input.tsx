@@ -35,9 +35,10 @@ export interface InputProps {
   keyboardType?: KeyboardTypeOptions
   onFocus?: (e: NativeSyntheticEvent<TextInputFocusEventData>) => void
   onBlur?: (e: NativeSyntheticEvent<TextInputFocusEventData>) => void
+  maxLength?: number
 }
 
-const Input: React.FC<InputProps> = ({ title, value, onChangeText, placeholder = '', keyboardType, onFocus, onBlur }) => {
+const Input: React.FC<InputProps> = ({ title, value, onChangeText, placeholder = '', keyboardType, onFocus, onBlur, maxLength }) => {
   const handleChange = (text: string): void => {
     switch (keyboardType) {
       case 'numeric':
@@ -61,6 +62,7 @@ const Input: React.FC<InputProps> = ({ title, value, onChangeText, placeholder =
         onFocus={onFocus}
         onBlur={onBlur}
         placeholderTextColor='#999'
+        maxLength={maxLength}
       />
     </Container>
   )

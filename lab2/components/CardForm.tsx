@@ -10,30 +10,23 @@ export interface CardFormProps {
 }
 
 const CardForm: React.FC<CardFormProps> = ({ card, onCard, onFocus, onBlur }) => {
-  const handleNumberChange = (number: string): void => {
-    if (number.length > 16) {
-      onCard({ number: number.slice(0, 16) })
-    } else {
-      onCard({ number })
-    }
-  }
-
   return (
     <>
       <Input
         title='Card number'
         value={card.number}
-        onChangeText={handleNumberChange}
+        onChangeText={(number) => onCard({ number })}
         placeholder='4242424242424242'
         keyboardType='numeric'
         onFocus={() => onFocus('number')}
         onBlur={onBlur}
+        maxLength={16}
       />
 
       <Input
         title='Card holder'
         value={card.name}
-        onChangeText={(name) => onCard({ ...card, name })}
+        onChangeText={(name) => onCard({ name })}
         placeholder='John Doe'
         onFocus={() => onFocus('name')}
         onBlur={onBlur}
@@ -54,11 +47,12 @@ const CardForm: React.FC<CardFormProps> = ({ card, onCard, onFocus, onBlur }) =>
       <Input
         title='CVC'
         value={card.cvc}
-        onChangeText={(cvc) => onCard({ ...card, cvc })}
+        onChangeText={(cvc) => onCard({ cvc })}
         placeholder='123'
         keyboardType='numeric'
         onFocus={() => onFocus('cvc')}
         onBlur={onBlur}
+        maxLength={3}
       />
     </>
   )
