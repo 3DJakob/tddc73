@@ -1,5 +1,5 @@
 import React from 'react'
-import { KeyboardTypeOptions, NativeSyntheticEvent, TextInputFocusEventData } from 'react-native'
+import { KeyboardTypeOptions, NativeSyntheticEvent, StyleProp, TextInputFocusEventData, ViewStyle } from 'react-native'
 import styled from 'styled-components/native'
 
 const Container = styled.View`
@@ -36,9 +36,10 @@ export interface InputProps {
   onFocus?: (e: NativeSyntheticEvent<TextInputFocusEventData>) => void
   onBlur?: (e: NativeSyntheticEvent<TextInputFocusEventData>) => void
   maxLength?: number
+  style?: StyleProp<ViewStyle>
 }
 
-const Input: React.FC<InputProps> = ({ title, value, onChangeText, placeholder = '', keyboardType, onFocus, onBlur, maxLength }) => {
+const Input: React.FC<InputProps> = ({ title, value, onChangeText, placeholder = '', keyboardType, onFocus, onBlur, maxLength, style }) => {
   const handleChange = (text: string): void => {
     switch (keyboardType) {
       case 'numeric':
@@ -50,7 +51,7 @@ const Input: React.FC<InputProps> = ({ title, value, onChangeText, placeholder =
   }
 
   return (
-    <Container>
+    <Container style={style}>
       <Label>
         {title}
       </Label>

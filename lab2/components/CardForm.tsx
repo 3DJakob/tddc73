@@ -1,6 +1,11 @@
 import React from 'react'
 import { Card } from './card'
 import Input from './Input'
+import styled from 'styled-components/native'
+
+const Row = styled.View`
+  flex-direction: row;
+`
 
 export interface CardFormProps {
   card: Card
@@ -10,6 +15,13 @@ export interface CardFormProps {
 }
 
 const CardForm: React.FC<CardFormProps> = ({ card, onCard, onFocus, onBlur }) => {
+  const handleBlurYear = (): void => {
+    if (card.expiryYear.length === 2) {
+      onCard({ expiryYear: '20' + card.expiryYear })
+      onBlur()
+    }
+  }
+
   return (
     <>
       <Input
@@ -32,17 +44,33 @@ const CardForm: React.FC<CardFormProps> = ({ card, onCard, onFocus, onBlur }) =>
         onBlur={onBlur}
       />
 
-      <Input
-        title='Expiry date'
-        value={card.expiryMonth + '/' + card.expiryYear}
-        onChangeText={(expiry) => {
-          const [expiryMonth, expiryYear] = expiry.split('/')
-          onCard({ expiryMonth, expiryYear })
-        }}
-        placeholder='12/2020'
-        onFocus={() => onFocus('expiry')}
-        onBlur={onBlur}
-      />
+      <Row>
+        <Input
+          title='Expiry month'
+          value={card.expiryMonth}
+          onChangeText={(expiryMonth) => {
+            onCard({ expiryMonth })
+          }}
+          placeholder='01'
+          onFocus={() => onFocus('expiry')}
+          onBlur={onBlur}
+          style={{ flex: 1 }}
+          maxLength={2}
+        />
+        <Input
+          title='Expiry month'
+          value={card.expiryYear}
+          onChangeText={(expiryYear) => {
+            onCard({ expiryYear })
+          }}
+          placeholder='2020'
+          onFocus={() => onFocus('expiry')}
+          onBlur={handleBlurYear}
+          style={{ marginLeft: 10, flex: 1 }}
+          maxLength={4}
+        />
+
+      </Row>
 
       <Input
         title='CVC'

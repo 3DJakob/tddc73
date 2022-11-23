@@ -28,8 +28,8 @@ const App: React.FC = () => {
   const [card, setCard] = useState<Card>({
     number: '',
     name: '',
-    expiryMonth: '12',
-    expiryYear: '2020',
+    expiryMonth: '',
+    expiryYear: '',
     cvc: ''
   })
   const [focusedField, setFocusedField] = useState<FocusedField>('number')
