@@ -13,7 +13,7 @@ const CardBody = styled.View`
 
   shadow-color: #000;
   shadow-offset: 0 40px;
-  shadow-opacity: 0.3;
+  shadow-opacity: 0.01;
   shadow-radius: 40px;
   elevation: 1;
   z-index: 200;
