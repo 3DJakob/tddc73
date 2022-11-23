@@ -3,3 +3,9 @@
 ![demo](demo.gif)
 
 This folder contains the code for lab 2 where a credit card input was created.
+
+## Installation
+```npm install```
+
+## Running
+```expo start```
