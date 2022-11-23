@@ -63,6 +63,7 @@ const CardForm: React.FC<CardFormProps> = ({ card, onCard, onFocus, onBlur }) =>
           onBlur={onBlur}
           style={{ flex: 1 }}
           maxLength={2}
+          keyboardType='numeric'
         />
         <Input
           title='Expiry year'
@@ -75,6 +76,7 @@ const CardForm: React.FC<CardFormProps> = ({ card, onCard, onFocus, onBlur }) =>
           onBlur={handleBlurYear}
           style={{ marginLeft: 10, flex: 1 }}
           maxLength={4}
+          keyboardType='numeric'
         />
         <Input
           title='CVC'
