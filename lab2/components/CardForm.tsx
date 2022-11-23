@@ -58,7 +58,7 @@ const CardForm: React.FC<CardFormProps> = ({ card, onCard, onFocus, onBlur }) =>
           maxLength={2}
         />
         <Input
-          title='Expiry month'
+          title='Expiry year'
           value={card.expiryYear}
           onChangeText={(expiryYear) => {
             onCard({ expiryYear })
