@@ -7,7 +7,7 @@ const Container = styled.View`
 `
 
 const StyledInput = styled.TextInput`
-  border: 1px solid #2364d2;
+  border: 1px solid #2b91d9;
   padding: 12px;
   font-size: 22px;
   border-radius: 8px;
@@ -15,7 +15,7 @@ const StyledInput = styled.TextInput`
   background-color: #fff;
   margin-bottom: 10px;
 
-  shadow-color: #000;
+  shadow-color: #2b91d9;
   shadow-offset: 0 14px;
   shadow-opacity: 0.05;
   shadow-radius: 5px;
