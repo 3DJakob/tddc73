@@ -46,10 +46,10 @@ const Input: React.FC<InputProps> = ({ title, value, onChangeText, placeholder =
         onChangeText(text.replace(/[^0-9]/g, ''))
         break
       case 'default':
-        onChangeText(text.replace(/[^a-zA-Z]/g, ''))
+        onChangeText(text.replace(/[^a-zA-Z ]/g, ''))
         break
       case undefined:
-        onChangeText(text.replace(/[^a-zA-Z]/g, ''))
+        onChangeText(text.replace(/[^a-zA-Z ]/g, ''))
         break
       default:
         onChangeText(text)
