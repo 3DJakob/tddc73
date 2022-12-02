@@ -1,68 +1,36 @@
 import { StatusBar } from 'expo-status-bar'
-import { StyleSheet, Text, View, AppRegistry, TextInput } from 'react-native'
-import { ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client'
-import { useEffect, useState } from 'react'
+import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
+import { GITHUB_TOKEN } from './secret'
+import useTrendingRepos from './src/hooks/useTrendingRepos'
+import RepoThumbnail from './src/components/RepoThumbnail'
+import styled from 'styled-components/native'
 
-// const networkInterface = createNetworkInterface({
-//   uri: 'https://api.github.com/graphql'
-// })
+const Container = styled.View`
 
-const client = new ApolloClient({
+`
+
+export const client = new ApolloClient({
   uri: 'https://api.github.com/graphql',
-  cache: new InMemoryCache()
-  // headers: {
-  //   Authorization: `Bearer ${process.env.GITHUB_TOKEN}`
-  // }
+  cache: new InMemoryCache(),
+  headers: {
+    Authorization: `Bearer ${GITHUB_TOKEN}`
+  }
 })
 
-export default function App () {
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
 
-  const getRepoos = async (): Promise<void> => {
-    client
-      .query({
-        query: gql`
-        query {
-          search(first: 10, query: "python is:public sort:stars-desc", type: REPOSITORY) {
-            nodes {
-              ... on Repository {
-                description
-                stargazers {
-                    totalCount
-                }
-              }
-              
-            }
-          }
-        }
-  `
-      })
-      .then((result) => console.log(result)).catch(alert)
-  }
-
-  useEffect(() => {
-
-  }, [])
+const App: React.FC = () => {
+  const repos = useTrendingRepos('python')
 
   return (
     <ApolloProvider client={client}>
-      <View style={styles.container}>
-        <TextInput style={{ padding: 10, borderWidth: 2 }} value={username} onChangeText={setUsername} placeholder='username' />
-        <TextInput style={{ padding: 10, borderWidth: 2 }} secureTextEntry value={password} onChangeText={setPassword} placeholder='password' textContentType='password' />
+      <Container>
+        {repos.map((repo) => (
+          <RepoThumbnail key={repo.description} repoInfo={repo} />
+        ))}
         <StatusBar style='auto' />
-      </View>
+      </Container>
     </ApolloProvider>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center'
-  }
-})
-
-AppRegistry.registerComponent('MyApplication', () => App)
+// registerComponent('MyApplication', () => App)
+export default App

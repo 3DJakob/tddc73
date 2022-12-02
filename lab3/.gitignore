@@ -8,6 +8,7 @@ npm-debug.*
 *.key
 *.mobileprovision
 *.orig.*
+secret.tsx
 web-build/
 # macOS
 .DS_Store
