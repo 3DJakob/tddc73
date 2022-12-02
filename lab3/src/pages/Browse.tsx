@@ -13,6 +13,7 @@ const Center = styled.View`
   flex: 1;
   align-items: center;
   justify-content: center;
+  min-height: 200px;
 `
 
 const topics = [
@@ -51,7 +52,7 @@ const Browse: React.FC = () => {
       </Picker>
       <Container>
         {!loading && repos.map((repo) => (
-          <RepoThumbnail key={repo.description} repoInfo={repo} />
+          <RepoThumbnail key={repo.description} repository={repo} />
         ))}
         {loading && <Center><ActivityIndicator /></Center>}
       </Container>

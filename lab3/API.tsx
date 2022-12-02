@@ -6,12 +6,25 @@ export interface Stargazers {
   totalCount: number
 }
 
+export interface History {
+  __typename: string
+  totalCount: number
+}
+
+export interface CommitsCount {
+  __typename: string
+  history: History
+}
+
 export interface GithubRepoInfo {
   __typename: string
-  nameWithOwner: string
-  url: string
+  commitsCountMain?: CommitsCount
+  commitsCountMaster?: CommitsCount
   description: string
+  forkCount: number
+  nameWithOwner: string
   stargazers: Stargazers
+  url: string
 }
 
 export const clientConfig = {
@@ -38,8 +51,22 @@ export const getRepos = async (query: string): Promise<GithubRepoInfo[]> => {
               stargazers {
                   totalCount
               }
+              forkCount
+              commitsCountMain: object(expression: "main") {
+                ... on Commit {
+                   history {
+                    totalCount
+                  }
+                }
+              }
+              commitsCountMaster: object(expression: "main") {
+                ... on Commit {
+                   history {
+                    totalCount
+                  }
+                }
+              }
             }
-            
           }
         }
       }`

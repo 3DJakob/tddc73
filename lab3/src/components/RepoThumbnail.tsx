@@ -1,11 +1,12 @@
 import React from 'react'
 import styled from 'styled-components/native'
 import { GithubRepoInfo } from '../../API'
-import { Feather, FontAwesome } from '@expo/vector-icons'
-import { Linking, TouchableOpacity } from 'react-native'
+import { FontAwesome } from '@expo/vector-icons'
+import { TouchableOpacity } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 
 export interface RepoThumbnailProps {
-  repoInfo: GithubRepoInfo
+  repository: GithubRepoInfo
 }
 
 const Card = styled.View`
@@ -27,9 +28,10 @@ const Description = styled.Text`
 const Url = styled.Text`
   color: #565656;
   font-size: 14px;
+  margin-bottom: 10px;
 `
 
-const Stars = styled.Text`
+const NumberOf = styled.Text`
   color: #fff;
   margin-left: 8px;
 `
@@ -45,27 +47,27 @@ const Block = styled.View`
   align-items: center;
 `
 
-const RepoThumbnail: React.FC<RepoThumbnailProps> = ({ repoInfo }) => {
-  const visit = (): void => {
-    Linking.canOpenURL(repoInfo.url).then((supported) => {
-      if (supported) {
-        Linking.openURL(repoInfo.url).catch(alert)
-      } else {
-        console.log("Don't know how to open URI: " + repoInfo.url)
-      }
-    }).catch(alert)
+const RepoThumbnail: React.FC<RepoThumbnailProps> = ({ repository }) => {
+  const navigation = useNavigation()
+
+  const navigateTo = (): void => {
+    navigation.navigate('Repo', { repository })
   }
 
   return (
-    <TouchableOpacity onPress={visit}>
+    <TouchableOpacity onPress={navigateTo}>
       <Card>
-        <Title>{repoInfo.nameWithOwner}</Title>
-        <Url>{repoInfo.url}</Url>
-        <Description>{repoInfo.description}</Description>
+        <Title>{repository.nameWithOwner}</Title>
+        <Url>{repository.url}</Url>
+        <Description>{repository.description}</Description>
         <Row>
           <Block>
             <FontAwesome name='star' size={20} color='#FFD74A' />
-            <Stars>{repoInfo.stargazers.totalCount}</Stars>
+            <NumberOf>{repository.stargazers.totalCount}</NumberOf>
+          </Block>
+          <Block>
+            <FontAwesome name='code-fork' size={20} color='#FFF' />
+            <NumberOf>{repository.forkCount}</NumberOf>
           </Block>
           <FontAwesome name='github' size={40} color='grey' />
         </Row>
