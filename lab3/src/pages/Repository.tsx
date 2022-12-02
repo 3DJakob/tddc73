@@ -1,4 +1,4 @@
-import { FontAwesome } from '@expo/vector-icons'
+import { Feather, FontAwesome } from '@expo/vector-icons'
 import { useRoute } from '@react-navigation/native'
 import React from 'react'
 import { Linking, SafeAreaView } from 'react-native'
@@ -67,7 +67,7 @@ const Repository: React.FC = () => {
     if (amount === 0) return <></>
     return (
       <Block>
-        <FontAwesome name='code-fork' size={24} color='#fff' />
+        <Feather name='git-commit' size={24} color='#fff' />
         <NumberOf>{amount}</NumberOf>
       </Block>
     )
@@ -90,6 +90,20 @@ const Repository: React.FC = () => {
             <NumberOf>{repository.forkCount}</NumberOf>
           </Block>
           <Commits />
+        </Row>
+        <Row>
+          <Block>
+            <FontAwesome name='warning' size={20} color='#fff' />
+            <NumberOf>{repository.issues.totalCount}</NumberOf>
+          </Block>
+          <Block>
+            <Feather name='git-pull-request' size={20} color='#fff' />
+            <NumberOf>{repository.pullRequests.totalCount}</NumberOf>
+          </Block>
+          <Block>
+            <Feather name='eye' size={20} color='#fff' />
+            <NumberOf>{repository.pullRequests.totalCount}</NumberOf>
+          </Block>
         </Row>
         <Button title='View on github' onPress={visit}>
           <FontAwesome name='github' size={26} color='#fff' />

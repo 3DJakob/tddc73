@@ -16,15 +16,33 @@ export interface CommitsCount {
   history: History
 }
 
+export interface Issues {
+  __typename: string
+  totalCount: number
+}
+
+export interface PullRequests {
+  __typename: string
+  totalCount: number
+}
+
+export interface Watchers {
+  __typename: string
+  totalCount: number
+}
+
 export interface GithubRepoInfo {
   __typename: string
-  commitsCountMain?: CommitsCount
-  commitsCountMaster?: CommitsCount
+  commitsCountMain: CommitsCount
+  commitsCountMaster: CommitsCount
   description: string
   forkCount: number
+  issues: Issues
   nameWithOwner: string
+  pullRequests: PullRequests
   stargazers: Stargazers
   url: string
+  watchers: Watchers
 }
 
 export const clientConfig = {
@@ -65,6 +83,15 @@ export const getRepos = async (query: string): Promise<GithubRepoInfo[]> => {
                     totalCount
                   }
                 }
+              }
+              watchers {
+                totalCount
+              }
+              pullRequests {
+                totalCount
+              }
+              issues {
+                totalCount
               }
             }
           }
